@@ -4,6 +4,7 @@
   "description": "Tracks the bike availability from Decathlon IT",
   "main": "index.js",
   "scripts": {
+    "run": "node --max-http-header-size 15000 bot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Emanuele Coppola",
