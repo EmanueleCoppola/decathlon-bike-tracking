@@ -1,0 +1,16 @@
+{
+  "name": "decathlon-bike-tracking-bot",
+  "version": "1.0.0",
+  "description": "Tracks the bike availability from Decathlon IT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Emanuele Coppola",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.9",
+    "telegraf": "^4.3.0"
+  }
+}
