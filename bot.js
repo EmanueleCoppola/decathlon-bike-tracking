@@ -80,14 +80,15 @@ async function sleep(ms) {
             for (let sku in availabilityJson) {
                 if (!availabilityJson.hasOwnProperty(sku)) continue;
 
-                let oldAvailability = sku in OLD_AVAILABILITY ? OLD_AVAILABILITY[sku] : 0;
-                let newAvailability = availabilityJson[sku]['stockOnline'];
+                let hasOldAvailability = sku in OLD_AVAILABILITY;
+                let oldAvailability    = hasOldAvailability ? OLD_AVAILABILITY[sku] : 0;
+                let newAvailability    = availabilityJson[sku]['stockOnline'];
 
                 availabilityJson[sku] = availabilityJson[sku]['stockOnline'];
 
                 NEW_AVAILABILITY[sku] = newAvailability;
 
-                if (oldAvailability === 0 && newAvailability > 0) {
+                if (oldAvailability === 0 && newAvailability > 0 && !hasOldAvailability) {
                     shouldNotifyProduct = true;
 
                     message += `- ${sizes[sku]}: ${newAvailability} ${newAvailability === 1 ? 'pezzo disponibile' : 'pezzi disponibili'}\n`;
