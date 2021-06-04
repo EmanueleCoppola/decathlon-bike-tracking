@@ -1,10 +1,11 @@
 const fs = require('fs');
+const path = require('path');
 
 const axios = require('axios');
 const cheerio = require('cheerio');
 const { Telegraf } = require('telegraf');
 
-const OLD_AVAILABILITY = require('./availability.json');
+const OLD_AVAILABILITY = require(path.resolve(__dirname, './availability.json'));
 let   NEW_AVAILABILITY = OLD_AVAILABILITY;
 
 const TELEGRAM_BOT_TOKEN   = null;
@@ -106,6 +107,6 @@ async function sleep(ms) {
         await sleep(WAIT_GET);
     }
 
-    fs.writeFileSync('./availability.json', JSON.stringify(NEW_AVAILABILITY));
+    fs.writeFileSync(path.resolve(__dirname, './availability.json'), JSON.stringify(NEW_AVAILABILITY));
 })();
 
