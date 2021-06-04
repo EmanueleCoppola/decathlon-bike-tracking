@@ -101,6 +101,6 @@ async function sleep(ms) {
         await sleep(WAIT_GET);
     }
 
-    fs.writeFileSync('availability.json', JSON.stringify(NEW_AVAILABILITY));
+    fs.writeFileSync('./availability.json', JSON.stringify(NEW_AVAILABILITY));
 })();
 
