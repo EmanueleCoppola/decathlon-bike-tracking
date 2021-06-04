@@ -7,8 +7,10 @@ const { Telegraf } = require('telegraf');
 const OLD_AVAILABILITY = require('./availability.json');
 let   NEW_AVAILABILITY = OLD_AVAILABILITY;
 
-const TELEGRAM_BOT_TOKEN   = 'CHANGE_HERE';
-const TELEGRAM_BOT_CHANNEL = 'CHANGE_HERE';
+const TELEGRAM_BOT_TOKEN   = null;
+const TELEGRAM_BOT_CHANNEL = null;
+
+if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_BOT_CHANNEL) process.exit(1);
 
 const WAIT_GET = 3*1000;
 const WAIT_XHR = 800;
@@ -24,6 +26,9 @@ async function sleep(ms) {
         // RC 120
         'https://www.decathlon.it/p/bici-da-corsa-rc120/_/R-p-302301',
         'https://www.decathlon.it/p/bici-da-corsa-rc120-fb-blu-arancione/_/R-p-311239',
+
+        // GRVL 120
+        'https://www.decathlon.it/p/bici-gravel-triban-grvl-120/_/R-p-312397',
 
         // RC 500
         'https://www.decathlon.it/p/bici-da-corsa-triban-rc-500-nera/_/R-p-301728',
