@@ -44,6 +44,7 @@ async function sleep(ms) {
         // GRVL 520
         'https://www.decathlon.it/p/bici-gravel-uomo-grvl-520/_/R-p-313016',
         'https://www.decathlon.it/p/bici-gravel-donna-grvl-520/_/R-p-328031',
+        'https://www.decathlon.it/p/bici-gravel-uomo-grvl-520-subcompact/_/R-p-313015',
 
         // ELOPS 120
         'https://www.decathlon.it/p/bici-citta-elops-120-telaio-alto-azzurra/_/R-p-168865',
