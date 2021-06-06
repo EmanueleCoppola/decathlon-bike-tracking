@@ -50,6 +50,12 @@ async function sleep(ms) {
         'https://www.decathlon.it/p/bici-citta-elops-120-telaio-alto-azzurra/_/R-p-168865',
         'https://www.decathlon.it/p/bici-citta-elops-120-telaio-basso-azzurra/_/R-p-168864',
 
+        // RIVERSIDE 500
+        'https://www.decathlon.it/p/bici-trekking-riverside-500/_/R-p-300777',
+        
+        // RVERSIDE 900
+        'https://www.decathlon.it/p/bici-trekking-riverside-900/_/R-p-300794',
+        
         // RIVERSIDE 920
         'https://www.decathlon.it/p/bici-trekking-riverside-920/_/R-p-300795',
         'https://www.decathlon.it/p/bici-da-viaggio-riverside-touring-920/_/R-p-332473'
