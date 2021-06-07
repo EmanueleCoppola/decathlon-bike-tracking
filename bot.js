@@ -96,7 +96,7 @@ async function sleep(ms) {
 
                 NEW_AVAILABILITY[sku] = newAvailability;
 
-                if (oldAvailability === 0 && newAvailability > 0 && !hasOldAvailability) {
+                if (oldAvailability === 0 && newAvailability > 0 && hasOldAvailability) {
                     shouldNotifyProduct = true;
 
                     message += `- ${sizes[sku]}: ${newAvailability} ${newAvailability === 1 ? 'pezzo disponibile' : 'pezzi disponibili'}\n`;
