@@ -54,18 +54,16 @@ async function sleep(ms) {
 
         // RIVERSIDE 500
         'https://www.decathlon.it/p/bici-trekking-riverside-500/_/R-p-300777',
-        
+
         // RIVERSIDE 900
         'https://www.decathlon.it/p/bici-trekking-riverside-900/_/R-p-300794',
-        
+
         // RIVERSIDE 920
         'https://www.decathlon.it/p/bici-trekking-riverside-920/_/R-p-300795',
         'https://www.decathlon.it/p/bici-da-viaggio-riverside-touring-920/_/R-p-332473'
     ];
 
     for (let productUrl of PRODUCTS) {
-        let message = '';
-
         let page = await axios.get(productUrl);
         let $ = cheerio.load(page.data);
 
@@ -74,6 +72,8 @@ async function sleep(ms) {
         let models = _ctx['_ctx']['data'].find((datum) => datum.type === 'Supermodel')['data']['models'];
 
         for (let model of models) {
+            let message = '';
+
             let skus  = model['skus'].map((item) => Number(item['skuId']));
             let sizes = Object.fromEntries(model['skus'].map((item) => [Number(item['skuId']), item['size']]));
 
