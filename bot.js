@@ -60,7 +60,21 @@ async function sleep(ms) {
 
         // RIVERSIDE 920
         'https://www.decathlon.it/p/bici-trekking-riverside-920/_/R-p-300795',
-        'https://www.decathlon.it/p/bici-da-viaggio-riverside-touring-920/_/R-p-332473'
+        'https://www.decathlon.it/p/bici-da-viaggio-riverside-touring-920/_/R-p-332473',
+        
+        // ROCKRIDER XC 100
+        'https://www.decathlon.it/p/mtb-xc-100-s-12s-29/_/R-p-304208',
+        'https://www.decathlon.it/p/mtb-semirigida-rockrider-xc-100-29-deore/_/R-p-330066',
+        
+        // ROCKRIDER XC 500
+        'https://www.decathlon.it/p/mtb-xc-500-29-12v/_/R-p-304245',
+        'https://www.decathlon.it/p/mtb-rockrider-xc-500-s-29-carbonio-full-suspended/_/R-p-325050',
+        
+        // ROCKRIDER XC 900
+        'https://www.decathlon.it/p/mtb-xc-900-carbonio-rosso-nero-29/_/R-p-300807',
+        
+        // ROCKRIDER XC 920
+        'https://www.decathlon.it/p/mtb-rockrider-xc-920-s-ltd-29-carbonio/_/R-p-331705'
     ];
 
     for (let productUrl of PRODUCTS) {
