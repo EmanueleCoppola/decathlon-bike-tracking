@@ -33,6 +33,10 @@ async function sleep(ms) {
      */
 
     const PRODUCTS = [
+        // ELOPS 120
+        'https://www.decathlon.it/p/bici-citta-elops-120-telaio-alto-azzurra/_/R-p-168865',
+        'https://www.decathlon.it/p/bici-citta-elops-120-telaio-basso-azzurra/_/R-p-168864',
+
         // BDC
         'https://www.decathlon.it/p/bici-da-corsa-triban-rc-500-fb/_/R-p-306215',
         'https://www.decathlon.it/p/bici-da-corsa-rc120/_/R-p-302301',
@@ -72,25 +76,6 @@ async function sleep(ms) {
         'https://www.decathlon.it/p/bici-ciclocross-rcx-van-rysel-grx-1x/_/R-p-324261',
         'https://www.decathlon.it/p/bici-gravel-uomo-grvl-520-subcompact/_/R-p-313015',
         'https://www.decathlon.it/p/bici-gravel-van-rysel-edr-offroad-grx-1x/_/R-p-327757',
-
-        // ELOPS 120
-        'https://www.decathlon.it/p/bici-citta-elops-120-telaio-alto-azzurra/_/R-p-168865',
-        'https://www.decathlon.it/p/bici-citta-elops-120-telaio-basso-azzurra/_/R-p-168864',
-
-        // TREKKING
-        'https://www.decathlon.it/p/bici-trekking-a-pedalata-assistita-original-920-e/_/R-p-325430',
-        'https://www.decathlon.it/p/bici-trekking-a-pedalata-assistita-riverside-500-e/_/R-p-169143',
-        'https://www.decathlon.it/p/bici-trekking-riverside-920/_/R-p-300795',
-        'https://www.decathlon.it/p/bici-trekking-a-pedalata-assistita-riverside-540-e-azzurro/_/R-p-330244',
-        'https://www.decathlon.it/p/bici-trekking-riverside-900/_/R-p-300794',
-        'https://www.decathlon.it/p/bici-trekking-riverside-100-nera/_/R-p-300787',
-        'https://www.decathlon.it/p/bici-trekking-riverside-500/_/R-p-300777',
-        'https://www.decathlon.it/p/bici-da-viaggio-riverside-touring-520/_/R-p-312723',
-        'https://www.decathlon.it/p/bici-trekking-riverside-120-grigia/_/R-p-300806',
-        'https://www.decathlon.it/p/bici-trekking-riverside-120/_/R-p-335831',
-
-        // WRONG CATEGORY
-        'https://www.decathlon.it/p/bici-da-viaggio-riverside-touring-920/_/R-p-332473',
         
         // MTB
         'https://www.decathlon.it/p/mtb-st-100-grigia-27-5/_/R-p-192872',
@@ -124,57 +109,75 @@ async function sleep(ms) {
         'https://www.decathlon.it/p/mtb-elettrica-a-pedalata-assistita-donna-e-st520-nera-27-5/_/R-p-311573',
         'https://www.decathlon.it/p/mtb-st-900-27-5/_/R-p-301098',
         'https://www.decathlon.it/p/mtb-elettrica-a-pedalata-assistita-donna-e-st100-bianca-27-5/_/R-p-311489',
-        'https://www.decathlon.it/p/mtb-elettrica-a-pedalata-assistita-stilus-e-am-v2-azzurra-27-5/_/R-p-X862303'
+
+        // TREKKING
+        'https://www.decathlon.it/p/bici-trekking-a-pedalata-assistita-original-920-e/_/R-p-325430',
+        'https://www.decathlon.it/p/bici-trekking-a-pedalata-assistita-riverside-500-e/_/R-p-169143',
+        'https://www.decathlon.it/p/bici-trekking-riverside-920/_/R-p-300795',
+        'https://www.decathlon.it/p/bici-trekking-a-pedalata-assistita-riverside-540-e-azzurro/_/R-p-330244',
+        'https://www.decathlon.it/p/bici-trekking-riverside-900/_/R-p-300794',
+        'https://www.decathlon.it/p/bici-trekking-riverside-100-nera/_/R-p-300787',
+        'https://www.decathlon.it/p/bici-trekking-riverside-500/_/R-p-300777',
+        'https://www.decathlon.it/p/bici-da-viaggio-riverside-touring-520/_/R-p-312723',
+        'https://www.decathlon.it/p/bici-trekking-riverside-120-grigia/_/R-p-300806',
+        'https://www.decathlon.it/p/bici-trekking-riverside-120/_/R-p-335831',
+
+        // WRONG CATEGORY
+        'https://www.decathlon.it/p/bici-da-viaggio-riverside-touring-920/_/R-p-332473'
     ];
 
     for (let productUrl of PRODUCTS) {
-        let page = await axios.get(productUrl);
-        let $ = cheerio.load(page.data);
+        try {
+            let page = await axios.get(productUrl);
+            let $ = cheerio.load(page.data);
 
-        let _ctx = JSON.parse($('#__dkt').html());
+            let _ctx = JSON.parse($('#__dkt').html());
 
-        let models = _ctx['_ctx']['data'].find((datum) => datum.type === 'Supermodel')['data']['models'];
+            let models = _ctx['_ctx']['data'].find((datum) => datum.type === 'Supermodel')['data']['models'];
 
-        for (let model of models) {
-            let message = '';
+            for (let model of models) {
+                let message = '';
 
-            let skus  = model['skus'].map((item) => Number(item['skuId']));
-            let sizes = Object.fromEntries(model['skus'].map((item) => [Number(item['skuId']), item['size']]));
+                let skus  = model['skus'].map((item) => Number(item['skuId']));
+                let sizes = Object.fromEntries(model['skus'].map((item) => [Number(item['skuId']), item['size']]));
 
-            let availabilityUrl = 'https://www.decathlon.it/it/ajax/nfs/stocks/online?skuIds=' + skus.join(',');
-            await sleep(WAIT_XHR);
+                let availabilityUrl = 'https://www.decathlon.it/it/ajax/nfs/stocks/online?skuIds=' + skus.join(',');
+                await sleep(WAIT_XHR);
 
-            let availabilityJson = await axios.get(availabilityUrl);
-                availabilityJson = availabilityJson.data;
+                let availabilityJson = await axios.get(availabilityUrl);
+                    availabilityJson = availabilityJson.data;
 
-            message += `${model['webLabel']} \n\n`;
+                message += `${model['webLabel']} \n\n`;
 
-            let shouldNotifyProduct = false;
+                let shouldNotifyProduct = false;
 
-            for (let sku in availabilityJson) {
-                if (!availabilityJson.hasOwnProperty(sku)) continue;
+                for (let sku in availabilityJson) {
+                    if (!availabilityJson.hasOwnProperty(sku)) continue;
 
-                let hasOldAvailability = sku in OLD_AVAILABILITY;
-                let oldAvailability    = hasOldAvailability ? OLD_AVAILABILITY[sku] : 0;
-                let newAvailability    = availabilityJson[sku]['stockOnline'];
+                    let hasOldAvailability = sku in OLD_AVAILABILITY;
+                    let oldAvailability    = hasOldAvailability ? OLD_AVAILABILITY[sku] : 0;
+                    let newAvailability    = availabilityJson[sku]['stockOnline'];
 
-                availabilityJson[sku] = availabilityJson[sku]['stockOnline'];
+                    availabilityJson[sku] = availabilityJson[sku]['stockOnline'];
 
-                NEW_AVAILABILITY[sku] = newAvailability;
+                    NEW_AVAILABILITY[sku] = newAvailability;
 
-                if (oldAvailability === 0 && newAvailability > 0 && hasOldAvailability) {
-                    shouldNotifyProduct = true;
+                    if (oldAvailability === 0 && newAvailability > 0 && hasOldAvailability) {
+                        shouldNotifyProduct = true;
 
-                    message += `- ${sizes[sku]}: ${newAvailability} ${newAvailability === 1 ? 'pezzo disponibile' : 'pezzi disponibili'}\n`;
+                        message += `- ${sizes[sku]}: ${newAvailability} ${newAvailability === 1 ? 'pezzo disponibile' : 'pezzi disponibili'}\n`;
+                    }
+                }
+
+                message += `\n`;
+                message += `${productUrl}\n`;
+
+                if (shouldNotifyProduct) {
+                    TELEGRAM.telegram.sendMessage(TELEGRAM_BOT_CHANNEL, message);
                 }
             }
-
-            message += `\n`;
-            message += `${productUrl}\n`;
-
-            if (shouldNotifyProduct) {
-                TELEGRAM.telegram.sendMessage(TELEGRAM_BOT_CHANNEL, message);
-            }
+        } catch (e) {
+            console.warn(`Error on URL: ${productUrl}`);
         }
 
         await sleep(WAIT_GET);
