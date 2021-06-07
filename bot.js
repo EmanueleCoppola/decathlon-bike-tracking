@@ -176,6 +176,8 @@ async function sleep(ms) {
                     TELEGRAM.telegram.sendMessage(TELEGRAM_BOT_CHANNEL, message);
                 }
             }
+
+            console.log(`Success on URL: ${productUrl}`);
         } catch (e) {
             console.warn(`Error on URL: ${productUrl}`);
         }
