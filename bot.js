@@ -5,11 +5,13 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const { Telegraf } = require('telegraf');
 
+const CONFIG = require(path.resolve(__dirname, './config.json'));
+
 const OLD_AVAILABILITY = require(path.resolve(__dirname, './availability.json'));
 let   NEW_AVAILABILITY = OLD_AVAILABILITY;
 
-const TELEGRAM_BOT_TOKEN   = null;
-const TELEGRAM_BOT_CHANNEL = null;
+const TELEGRAM_BOT_TOKEN   = CONFIG['TELEGRAM_BOT_TOKEN'];
+const TELEGRAM_BOT_CHANNEL = CONFIG['TELEGRAM_BOT_CHANNEL'];
 
 if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_BOT_CHANNEL) process.exit(1);
 
@@ -53,7 +55,7 @@ async function sleep(ms) {
         // RIVERSIDE 500
         'https://www.decathlon.it/p/bici-trekking-riverside-500/_/R-p-300777',
         
-        // RVERSIDE 900
+        // RIVERSIDE 900
         'https://www.decathlon.it/p/bici-trekking-riverside-900/_/R-p-300794',
         
         // RIVERSIDE 920
