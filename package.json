@@ -1,7 +1,7 @@
 {
   "name": "decathlon-bike-tracking-bot",
   "version": "1.0.0",
-  "description": "Tracks the bike availability from Decathlon IT",
+  "description": "It tracks the bike availability from Decathlon IT",
   "main": "index.js",
   "scripts": {
     "bot": "node --max-http-header-size 15000 bot.js",
